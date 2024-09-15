@@ -1,0 +1,7 @@
+<!-- templates/post_confirm_delete.html -->
+<h1>Are you sure you want to delete "{{ object.title }}"?</h1>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirm</button>
+</form>
+<a href="{% url 'post_detail' object.pk %}">Cancel</a>
