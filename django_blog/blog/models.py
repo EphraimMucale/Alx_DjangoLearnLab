@@ -6,6 +6,10 @@ from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.utils import timezone
 from django.contrib.auth.models import BaseUserManager
 
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
 class UserManager(BaseUserManager):
     def create_user(self, email, password):
         if not email:
@@ -53,3 +57,8 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
+    
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'
